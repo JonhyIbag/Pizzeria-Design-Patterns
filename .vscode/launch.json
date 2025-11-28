@@ -17,14 +17,14 @@
             "request": "launch",
             "mainClass": "App",
             "projectName": "Pizzeria_bfc57859",
-            "vmArgs": "--module-path /Users/jonathanaguilar/Desktop/Escuela/Movilidad/PatronesDeDiseno/ProyectoFinal/JavaFX/javafx-sdk-25.0.1/lib --add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics"
+            //"vmArgs": "--module-path /Users/jonathanaguilar/Desktop/Escuela/Movilidad/PatronesDeDiseno/ProyectoFinal/JavaFX/javafx-sdk-25.0.1/lib --add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics"
         },
         {
             "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "vmArgs": "--module-path /Users/jonathanaguilar/Desktop/Escuela/Movilidad/PatronesDeDiseno/ProyectoFinal/JavaFX/javafx-sdk-25.0.1/lib --add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics"
+            //"vmArgs": "--module-path /Users/jonathanaguilar/Desktop/Escuela/Movilidad/PatronesDeDiseno/ProyectoFinal/JavaFX/javafx-sdk-25.0.1/lib --add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics"
         }
     ]
 }
