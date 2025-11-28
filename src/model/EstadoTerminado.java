@@ -1,0 +1,42 @@
+package model;
+
+public class EstadoTerminado implements model.abst.EstadoPedido {
+    private Pedido pedido;
+
+    public EstadoTerminado(Pedido pedido){
+        this.pedido = pedido;
+    }
+
+    @Override
+    public void recibirPedido() {
+        System.out.println("El pedido ya ha sido recibido.");
+    }
+
+    @Override
+    public void prepararPedido() {
+        System.out.println("El pedido está siendo preparado.");
+    }
+
+    @Override
+    public void cocinarPedido() {
+        System.out.println("El pedido está siendo horneado.");
+    }
+
+    @Override
+    public void empaquetarPedido() {
+        System.out.println("El pedido ya esta empaquetado y listo.");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        pedido.estadoActual = pedido.estadoEntregado;
+        pedido.entregarPedido();
+    }
+
+    @Override
+    public void entregarPedido() {
+        System.out.println("El pedido ya ha sido entregado.");
+    }
+    
+}
