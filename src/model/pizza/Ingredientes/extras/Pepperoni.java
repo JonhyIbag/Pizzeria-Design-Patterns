@@ -1,8 +1,16 @@
-package model.pizza.Ingredientes.extras;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model.pizza.ingredientes.extras;
 
+/**
+ *
+ * @author Usuario
+ */
 public class Pepperoni extends Extras{
-    private String nombre;
-    private Double precio;
+    private final String nombre;
+    private final Double precio;
 
     public Pepperoni() {
         this.nombre = "Pepperoni";
@@ -18,5 +26,4 @@ public class Pepperoni extends Extras{
     public Double getPrecio() {
         return precio;
     }
-    
-}
+}   

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="vista.Controladores.VentanaOrdenarPizzaControlador">
+
+    <!-- configuracion cabecera-->
+    <top>
+        <VBox spacing="10">
+            <Label text="PIZZERIA UAM"
+                   maxWidth="Infinity"
+                   style="-fx-background-color: #ff4a5a;
+                          -fx-text-fill: white;
+                          -fx-font-size: 32px;
+                          -fx-font-weight: bold;
+                          -fx-alignment: center;">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </Label>
+
+            <!-- boton para seleccionar cantidad de pizzas -->
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="Cantidad de pizzas:"/>
+                <Button fx:id="btnMenos" text="-" onAction="#decrementarCantidad"
+                        style="-fx-background-color: #ff4a5a; -fx-text-fill: white;"/>
+                <TextField fx:id="txtCantidad" prefWidth="40" text="1"
+                           editable="false" alignment="CENTER"/>
+                <Button fx:id="btnMas" text="+" onAction="#incrementarCantidad"
+                        style="-fx-background-color: #47a147ff; -fx-text-fill: white;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- botones de seleccion de pizza -->
+    <center>
+        <GridPane hgap="40" vgap="20">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- caja de cong¿figuracion de masa  -->
+            <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" spacing="10">
+                <Label text="Masa" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                <ImageView fitWidth="90" preserveRatio="true">
+                    <image>
+                        <Image url="@/vista/imagenes/masa.png"/>
+                    </image>
+                </ImageView>
+                <RadioButton fx:id="rbMasaNapolitana" text="Napolitana"/>
+                <RadioButton fx:id="rbMasaRomana" text="Romana"/>
+                <RadioButton fx:id="rbMasaAmericana" text="Americana"/>
+            </VBox>
+
+            <!-- caja de cong¿figuracion de salsa-->
+            <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" spacing="10">
+                <Label text="Salsa" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                <ImageView fitWidth="90" preserveRatio="true">
+                    <image>
+                        <Image url="@/vista/imagenes/salsa.png"/>
+                    </image>
+                </ImageView>
+                <RadioButton fx:id="rbSalsaTomate" text="Tomate"/>
+                <RadioButton fx:id="rbSalsaBlanca" text="Blanca"/>
+                <RadioButton fx:id="rbSalsaBarbacoa" text="Barbacoa"/>
+            </VBox>
+
+            <!-- caja de cong¿figuracion de queso-->
+            <VBox GridPane.rowIndex="0" GridPane.columnIndex="2" spacing="10">
+                <Label text="Queso" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                <ImageView fitWidth="90" preserveRatio="true">
+                    <image>
+                        <Image url="@/vista/imagenes/queso.png"/>
+                    </image>
+                </ImageView>
+                <RadioButton fx:id="rbQuesoParmesano" text="Parmesano"/>
+                <RadioButton fx:id="rbQuesoMozzarella" text="Mozzarella"/>
+                <RadioButton fx:id="rbQuesoCheddar" text="Cheddar"/>
+            </VBox>
+
+            <!-- caja de cong¿figuracion de orilla -->
+            <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" spacing="10">
+                <Label text="Orilla" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                <ImageView fitWidth="90" preserveRatio="true">
+                    <image>
+                        <Image url="@/vista/imagenes/orilla.png"/>
+                    </image>
+                </ImageView>
+                <RadioButton fx:id="rbOrillaRellena" text="Rellena de queso"/>
+                <RadioButton fx:id="rbOrillaTradicional" text="Tradicional"/>
+                <RadioButton fx:id="rbOrillaCrujiente" text="Crujiente"/>
+            </VBox>
+
+            <!-- caja de cong¿figuracion de condimentos -->
+            <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" spacing="10">
+                <Label text="Condimentos" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                <ImageView fitWidth="90" preserveRatio="true">
+                    <image>
+                        <Image url="@/vista/imagenes/condimentos.png"/>
+                    </image>
+                </ImageView>
+                <CheckBox fx:id="cbOregano" text="Orégano"/>
+                <CheckBox fx:id="cbRomero" text="Romero"/>
+                <CheckBox fx:id="cbAlbahaca" text="Albahaca"/>
+            </VBox>
+
+            <!-- caja de cong¿figuracion de extras-->
+            <VBox GridPane.rowIndex="1" GridPane.columnIndex="2" spacing="10">
+                <Label text="Extras" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                <ImageView fitWidth="90" preserveRatio="true">
+                    <image>
+                        <Image url="@/vista/imagenes/extras.png"/>
+                    </image>
+                </ImageView>
+                <CheckBox fx:id="cbPepperoni" text="Pepperoni"/>
+                <CheckBox fx:id="cbChampinones" text="Champiñones"/>
+                <CheckBox fx:id="cbPimientos" text="Pimientos"/>
+            </VBox>
+
+        </GridPane>
+    </center>
+
+    <!-- botones de cofirmar -->
+    <bottom>
+        <HBox spacing="20" alignment="CENTER">
+            <padding>
+                <Insets top="15" right="40" bottom="15" left="40"/>
+            </padding>
+
+            <Button fx:id="btnRegresar" text="Regresar" prefWidth="150"
+                    onAction="#regresar"
+                    style="-fx-background-color: #ff4a5a; -fx-text-fill: white;"/>
+
+            <Button fx:id="btnContinuar" text="Continuar" prefWidth="150"
+                    onAction="#continuar"
+                    style="-fx-background-color: #ff4a5a; -fx-text-fill: white;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

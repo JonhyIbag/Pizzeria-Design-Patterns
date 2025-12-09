@@ -1,8 +1,17 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model.pizza.fabricas;
+
+/**
+ *
+ * @author Usuario
+ */
 
 import model.abst.Ingrediente;
 import model.abst.IngredienteFabrica;
-import model.pizza.Ingredientes.extras.*;
+import model.pizza.ingredientes.extras.*;
 
 public class ExtrasFabrica extends IngredienteFabrica {
 
@@ -53,3 +62,4 @@ public class ExtrasFabrica extends IngredienteFabrica {
     }
     
 }
+

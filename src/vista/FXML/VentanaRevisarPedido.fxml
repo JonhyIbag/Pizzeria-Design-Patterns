@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="vista.Controladores.VentanaRevisarPedidoControlador">
+
+    <!-- configuracion cabecera-->
+    <top>
+        <VBox spacing="10">
+            <Label text="PIZZERIA UAM"
+                   maxWidth="Infinity"
+                   style="-fx-background-color: #ff4a5a;
+                          -fx-text-fill: white;
+                          -fx-font-size: 32px;
+                          -fx-font-weight: bold;
+                          -fx-alignment: center;">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </Label>
+            <!-- etiqueta-->
+            <HBox alignment="CENTER_RIGHT">
+                <padding>
+                    <Insets top="5" right="40" bottom="5" left="40"/>
+                </padding>
+                <Label text="Precio total"
+                       style="-fx-background-color: #ff4a5a;
+                              -fx-text-fill: white;
+                              -fx-padding: 5 20 5 20;
+                              -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- tabla de armar pizza -->
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="15" right="40" bottom="15" left="40"/>
+            </padding>
+
+            <TableView fx:id="tablaLineas">
+                <columns>
+                    <TableColumn fx:id="colMasa"        text="Masa"        prefWidth="90"/>
+                    <TableColumn fx:id="colSalsa"       text="Salsa"       prefWidth="90"/>
+                    <TableColumn fx:id="colOrilla"      text="Orilla"      prefWidth="100"/>
+                    <TableColumn fx:id="colQueso"       text="Queso"       prefWidth="100"/>
+                    <TableColumn fx:id="colCondimentos" text="Condimentos" prefWidth="140"/>
+                    <TableColumn fx:id="colExtras"      text="Extras"      prefWidth="140"/>
+                    <TableColumn fx:id="colPrecio"      text="Precio"      prefWidth="80"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!--configurar botones  -->
+    <bottom>
+        <VBox spacing="10">
+            <HBox alignment="CENTER_RIGHT">
+                <padding>
+                    <Insets top="5" right="40" bottom="5" left="40"/>
+                </padding>
+                <Label fx:id="lblTotalGeneral"
+                       text="0"
+                       style="-fx-background-color: #ff4a5a;
+                              -fx-text-fill: white;
+                              -fx-padding: 5 40 5 40;
+                              -fx-font-weight: bold;"/>
+            </HBox>
+
+            <HBox spacing="20" alignment="CENTER">
+                <padding>
+                    <Insets top="10" right="40" bottom="15" left="40"/>
+                </padding>
+                <!-- configuraciones de los botones  -->
+                <Button fx:id="btnEliminar" text="Eliminar" prefWidth="150"
+                        onAction="#handleEliminar"
+                        style="-fx-background-color: #ff4a5a; -fx-text-fill: white;"/>
+                
+                <Button fx:id="btnModificar" text="Modificar" prefWidth="150"
+                        onAction="#handleRegresar"
+                        style="-fx-background-color: #ff4a5a; -fx-text-fill: white;"/>
+                
+                <Button fx:id="btnRegresar" text="Regresar" prefWidth="150"
+                        onAction="#handleRegresar"
+                        style="-fx-background-color: #ff4a5a; -fx-text-fill: white;"/>
+
+                <Button fx:id="btnContinuar" text="Continuar" prefWidth="150"
+                        onAction="#handleContinuar"
+                        style="-fx-background-color: #ff4a5a; -fx-text-fill: white;"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>

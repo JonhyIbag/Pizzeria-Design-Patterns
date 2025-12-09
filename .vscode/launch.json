@@ -1,29 +1,57 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
             "type": "java",
-            "name": "testFabricas",
+            "name": "testVentanaPrincipal",
             "request": "launch",
-            "mainClass": "test.testFabricas",
-            "projectName": "Pizzeria_bfc57859"
+            "mainClass": "vista.test.testVentanaPrincipal",
+            "vmArgs": "--module-path \"/Users/jonathanaguilar/Desktop/Escuela/Movilidad/PatronesDeDiseno/ProyectoFinal/JavaFX/javafx-sdk-25.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "testVentanaOrdenarPizza",
+            "request": "launch",
+            "mainClass": "vista.test.testVentanaOrdenarPizza",
+            "vmArgs": "--module-path \"/Users/jonathanaguilar/Desktop/Escuela/Movilidad/PatronesDeDiseno/ProyectoFinal/JavaFX/javafx-sdk-25.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "vista.test.Main",
+            "vmArgs": "--module-path \"/Users/jonathanaguilar/Desktop/Escuela/Movilidad/PatronesDeDiseno/ProyectoFinal/JavaFX/javafx-sdk-25.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "RunApp",
+            "request": "launch",
+            "mainClass": "App",
+            "vmArgs": "--module-path \"/Users/jonathanaguilar/Desktop/Escuela/Movilidad/PatronesDeDiseno/ProyectoFinal/JavaFX/javafx-sdk-25.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "TestCrearPizza",
+            "request": "launch",
+            "mainClass": "test.TestCrearPizza"
         },
         {
             "type": "java",
             "name": "testEstado",
             "request": "launch",
-            "mainClass": "test.testEstado",
-            "projectName": "Pizzeria_bfc57859"
+            "mainClass": "test.testEstado"
         },
         {
             "type": "java",
-            "name": "App",
+            "name": "testNotificacion",
             "request": "launch",
-            "mainClass": "App",
-            "projectName": "Pizzeria_bfc57859"
+            "mainClass": "test.testNotificacion"
+        },
+        {
+            "type": "java",
+            "name": "testFabricas",
+            "request": "launch",
+            "mainClass": "test.testFabricas"
         },
         {
             "type": "java",

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="vista.Controladores.VentanaPrincipalControlador">
+
+    <!-- configuracion cabecera-->
+    <top>
+        <VBox spacing="10">
+            <Label text="PIZZERIA UAM"
+                   maxWidth="Infinity"
+                   style="-fx-background-color: #ff4a5a;
+                          -fx-text-fill: white;
+                          -fx-font-size: 32px;
+                          -fx-font-weight: bold;
+                          -fx-alignment: center;">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </Label>
+
+            <HBox alignment="CENTER">
+                <Button text="Pedidos Registrados"
+                        disable="true"
+                        style="-fx-background-color: #47a147ff;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;"
+                        maxWidth="200"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- tabla de los pedidos-->
+    <center>
+        <TableView fx:id="tablaPedidos">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="80"/>
+                <TableColumn fx:id="colCliente" text="Cliente" prefWidth="180"/>
+                <TableColumn fx:id="colEstado" text="Estado Pedido" prefWidth="180"/>
+                <TableColumn fx:id="colTotal" text="Total" prefWidth="120"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- botones  -->
+    <bottom>
+        <HBox spacing="20" alignment="CENTER">
+            <padding>
+                <Insets top="15" right="40" bottom="15" left="40"/>
+            </padding>
+
+            <Button fx:id="btnNuevo" text="Nuevo Pedido" prefWidth="150"/>
+            <Button fx:id="btnVerEstado" text="Ver Estado" prefWidth="150"/>
+            <Button fx:id="btnSalir" text="Salir" prefWidth="150"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

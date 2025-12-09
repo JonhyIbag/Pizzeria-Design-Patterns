@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="vista.Controladores.VentanaEstadoControlador">
+
+    <!-- configuracion cabecera-->
+    <top>
+        <VBox spacing="10">
+            <Label text="PIZZERIA UAM"
+                   maxWidth="Infinity"
+                   style="-fx-background-color: #ff4a5a;
+                          -fx-text-fill: white;
+                          -fx-font-size: 32px;
+                          -fx-font-weight: bold;
+                          -fx-alignment: center;">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </Label>
+
+            <!-- etiqueta -->
+            <HBox alignment="CENTER">
+                <Label text="Estado del Pedido"
+                       style="-fx-background-color: #47a147ff;
+                              -fx-text-fill: white;
+                              -fx-font-weight: bold;
+                              -fx-padding: 8 40 8 40;
+                              -fx-background-radius: 20;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- configuracion de botones del proceso de estado -->
+    <center>
+        <VBox alignment="CENTER" spacing="30">
+            <padding>
+                <Insets top="30" right="40" bottom="30" left="40"/>
+            </padding>
+
+            <HBox spacing="80" alignment="CENTER">
+
+                <!-- caja para datos cliete -->
+                <VBox spacing="5" alignment="CENTER_LEFT">
+                    <Label fx:id="lblIdPedido" text="ID Pedido: 001"
+                           style="-fx-font-size: 16px;"/>
+                    <Label fx:id="lblCliente" text="Cliente: Luisa"
+                           style="-fx-font-size: 16px;"/>
+                </VBox>
+
+                <!-- timeline psrs los procesos -->
+                <HBox spacing="40" alignment="CENTER">
+                    <!-- Columna de puntos + líneas -->
+                    <VBox alignment="CENTER" spacing="8">
+                        <Label fx:id="puntoRecibido"/>
+                        <Label fx:id="linea1"/>
+                        <Label fx:id="puntoPreparando"/>
+                        <Label fx:id="linea2"/>
+                        <Label fx:id="puntoHorneando"/>
+                        <Label fx:id="linea3"/>
+                        <Label fx:id="puntoTerminado"/>
+                        <Label fx:id="linea4"/>
+                        <Label fx:id="puntoEntregado"/>
+                    </VBox>
+
+                    <!-- etiquetas estados -->
+                    <VBox alignment="CENTER_LEFT" spacing="18">
+                        <Label text="Recibido"    style="-fx-font-size: 16px;"/>
+                        <Label text="Preparando"  style="-fx-font-size: 16px;"/>
+                        <Label text="Horneando"   style="-fx-font-size: 16px;"/>
+                        <Label text="Terminado"   style="-fx-font-size: 16px;"/>
+                        <Label text="Entregado"   style="-fx-font-size: 16px;"/>
+                    </VBox>
+                </HBox>
+            </HBox>
+        </VBox>
+    </center>
+
+    <!-- cinfigurar botones  -->
+    <bottom>
+        <HBox alignment="CENTER_RIGHT">
+            <padding>
+                <Insets top="10" right="40" bottom="20" left="40"/>
+            </padding>
+            <Button fx:id="btnSalir" text="Cerrar" prefWidth="150"
+                    onAction="#handleSalir"
+                    style="-fx-background-color: #ff4a5a; -fx-text-fill: white;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,17 +1,24 @@
-package model.pizza.Ingredientes.masas;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model.pizza.ingredientes.masas;
+
+/**
+ *
+ * @author Usuario
+ */
 
 import model.abst.Ingrediente;
 
 public abstract class Masa implements Ingrediente {
     private String tipo="masa";
 
-    @Override
     public String getTipo() {
         return tipo;
     }
 
-    @Override
     public String toString() {
-        return "Tipo: " + tipo + ", Nombre: " + getNombre() + ", Precio: " + getPrecio();
+        return getNombre() + "\nPrecio: " + getPrecio();
     }
 }
