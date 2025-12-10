@@ -1,15 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.pizza.ingredientes.orillas;
-
-/**
- *
- * @author Usuario
- */
 import model.abst.Ingrediente;
 
+/**
+ * Clase abstracta que representa la orilla en la pizza.
+ * Hereda de la interfaz Ingrediente.
+ * Proporciona una implementación común para los métodos getTipo() y toString().
+ * @author Triplets
+ */
 public abstract class Orilla implements Ingrediente {
     private String tipo="orilla";
 

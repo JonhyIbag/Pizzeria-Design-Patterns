@@ -1,7 +1,6 @@
 package vista.Controladores;
 
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,8 +12,16 @@ import model.Pedido;
 import model.Pizza;
 import model.PizzeriaFacade;
 
+/**
+ * Controlador para la ventana de revisar pedido. Permite al usuario ver,
+ * modificar o eliminar pizzas del pedido actual, así como continuar al estado del pedido.
+ * @author Triplets
+ */
 public class VentanaRevisarPedidoControlador {
 
+    /**
+     * Componentes de la tabla de pizzas en el pedido.
+     */
     @FXML
     private TableView<Pizza> tablaLineas;
     @FXML
@@ -32,8 +39,15 @@ public class VentanaRevisarPedidoControlador {
     @FXML
     private TableColumn<Pizza, String> colPrecio;
 
+    /**
+     * Etiqueta para mostrar el total general del pedido.
+     */
     @FXML
     private Label lblTotalGeneral;
+    
+    /**
+     * Botones de la interfaz.
+     */
     @FXML
     private Button btnEliminar;
     @FXML
@@ -43,8 +57,15 @@ public class VentanaRevisarPedidoControlador {
     @FXML
     private Button btnContinuar;
 
+    /**
+     * Instancia de la fachada de la pizzería para acceder a la lógica del negocio.
+     */
     private PizzeriaFacade pizzeria;
 
+    /**
+     * Inicializa la ventana de revisar pedido, configurando la tabla y cargando los datos del pedido actual.
+     * El pedido actual se obtiene como el último pedido en la lista de pedidos de la pizzería.
+     */
     @FXML
     public void initialize() {
         // Inicializar la tabla y las columnas aquí
@@ -64,6 +85,10 @@ public class VentanaRevisarPedidoControlador {
         lblTotalGeneral.setText(String.format("Total: $%.2f", pizzeria.calcularTotal(pedido)));
     }
 
+    
+    /**
+     * Maneja el evento de regresar a la ventana de ordenar pizza.
+     */
     @FXML
     private void handleRegresar() {
         try {
@@ -81,11 +106,19 @@ public class VentanaRevisarPedidoControlador {
         }
     }
 
+    /**
+     * Maneja el evento de continuar a la ventana de estado del pedido.
+     * Utiliza el metodo setPedido del controlador de la ventana de estado para pasar el pedido actual
+     * y poder mostrar su estado.
+     */
     @FXML
     private void handleContinuar() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FXML/VentanaEstado.fxml"));
             Parent root = loader.load();
+
+            VentanaEstadoControlador controlador = loader.getController();
+            controlador.setPedido(pizzeria.getPedidos().getLast());
 
             Stage stage = (Stage) btnContinuar.getScene().getWindow();
             stage.setTitle("Estado Pedido");
@@ -98,6 +131,11 @@ public class VentanaRevisarPedidoControlador {
         }
     }
 
+    /**
+     * Maneja el evento de eliminar una pizza seleccionada del pedido.
+     * Muestra una alerta de confirmación antes de eliminar la pizza.
+     * Si no hay ninguna pizza seleccionada, muestra una alerta de advertencia.
+     */
     @FXML
     private void handleEliminar() {
         Pizza pizzaSeleccionada = tablaLineas.getSelectionModel().getSelectedItem();
@@ -119,6 +157,11 @@ public class VentanaRevisarPedidoControlador {
         }
     }
 
+    /**
+     * Maneja el evento de modificar una pizza seleccionada del pedido.
+     * Navega de vuelta a la ventana de ordenar pizza para permitir la modificación.
+     * Si ocurre un error al cargar la ventana, muestra una alerta de error.
+     */
     @FXML
     private void handleModificar() {
         try {

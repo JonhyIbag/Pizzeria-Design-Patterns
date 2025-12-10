@@ -1,10 +1,12 @@
 package test;
 
+import model.Cliente;
 import model.Pedido;
 
 public class testEstado {
     public static void main(String[] args) {
-        Pedido pedido = new Pedido();
+        Cliente cliente = new Cliente(0);
+        Pedido pedido = new Pedido(cliente);
         pedido.recibirPedido();
     }
 }

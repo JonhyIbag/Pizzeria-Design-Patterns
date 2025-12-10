@@ -1,20 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.pizza.fabricas;
-
-/**
- *
- * @author Usuario
- */
-
 import model.abst.Ingrediente;
 import model.abst.IngredienteFabrica;
 import model.pizza.ingredientes.masas.*;
 
+/**
+ * Fabrica concreta para crear ingredientes de tipo masa.
+ * Hereda de IngredienteFabrica e implementa el metodo crearMasa.
+ * @author Triplets
+ */
 public class MasaFabrica extends IngredienteFabrica {
 
+    /**
+     * Crea una instancia de un ingrediente de masa basado en el tipo proporcionado.
+     * @param tipo El tipo de masa a crear (Napolitana, Romana, Americana).
+     * @return Una instancia del ingrediente de masa correspondiente, o null si el tipo no es valido.
+     */
     @Override
     public Ingrediente crearMasa(String tipo) {
         switch (tipo) {

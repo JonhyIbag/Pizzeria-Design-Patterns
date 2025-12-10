@@ -1,57 +1,54 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.estadoPedido;
-
-/**
- *
- * @author Usuario
- */
-
 import model.Pedido;
 
+/**
+ * Esta clase representa el estado "Entregado" de un pedido en el sistema de gestión de pedidos.
+ * Nos ayuda a manejar el comportamiento del pedido cuando se encuentra en este estado.
+ * @author Triplets
+ */
 public class EstadoHorneando implements model.abst.EstadoPedido {
     private Pedido pedido;
 
+    /**
+     * Constructor de la clase EstadoHorneando.
+     * @param pedido
+     */
     public EstadoHorneando(Pedido pedido){
         this.pedido = pedido;
     }
 
     @Override
     public void recibirPedido() {
-        System.out.println("El pedido ya ha sido recibido.");
-        pedido.notifyObservers("El pedido ya ha sido recibido.");
     }
 
     @Override
     public void prepararPedido() {
-        System.out.println("El pedido está siendo preparado.");
-        pedido.notifyObservers("El pedido está siendo preparado.");
     }
 
+    /**
+     * Método que maneja la acción de entregar el pedido cuando está en el estado "Horneando".
+     * Notifica a los observadores que el pedido ha sido horneado.
+     */
     @Override
     public void cocinarPedido() {
-        System.out.println("El pedido está siendo horneado.");
         pedido.notifyObservers("Horneando");
-        /*try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         pedido.estadoActual = pedido.estadoTerminado;
-        pedido.empaquetarPedido();*/
     }
 
     @Override
     public void empaquetarPedido() {
-        System.out.println("El pedido ya esta empaquetado y listo.");
-        pedido.notifyObservers("El pedido ya esta empaquetado y listo.");
     }
 
     @Override
     public void entregarPedido() {
-        System.out.println("El pedido ya ha sido entregado.");
-        pedido.notifyObservers("El pedido ya ha sido entregado.");
+    }
+
+    /**
+     * Método que devuelve el nombre del estado actual.
+     * @return Nombre del estado "Horneando".
+     */
+    @Override
+    public String getEstadoNombre() {
+        return "Horneando";
     }
 }

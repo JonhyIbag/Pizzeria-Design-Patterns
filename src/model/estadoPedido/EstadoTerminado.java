@@ -1,59 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.estadoPedido;
-
-/**
- *
- * @author Usuario
- */
-
-
 import model.Pedido;
 
+/**
+ * Esta clase representa el estado "Terminado" de un pedido en el sistema de gestión de pedidos.
+ * Nos ayuda a manejar el comportamiento del pedido cuando se encuentra en este estado.
+ * @author Triplets
+ */
 public class EstadoTerminado implements model.abst.EstadoPedido {
+    /**
+     * Referencia al pedido asociado con este estado. utilizado para poder realizar los cambios de estado y notificaciones correspondientes.
+     */
     private Pedido pedido;
 
+    /**
+     * Constructor de la clase EstadoTerminado.
+     * @param pedido
+     */
     public EstadoTerminado(Pedido pedido){
         this.pedido = pedido;
     }
 
     @Override
     public void recibirPedido() {
-        System.out.println("El pedido ya ha sido recibido.");
-        pedido.notifyObservers("El pedido ya ha sido recibido.");
     }
 
     @Override
     public void prepararPedido() {
-        System.out.println("El pedido está siendo preparado.");
-        pedido.notifyObservers("El pedido está siendo preparado.");
     }
 
     @Override
     public void cocinarPedido() {
-        System.out.println("El pedido está siendo horneado.");
-        pedido.notifyObservers("El pedido está siendo horneado.");
     }
 
+    /**
+     * Método que maneja la acción de entregar el pedido cuando está en el estado "Terminado".
+     * Notifica a los observadores que el pedido ha sido terminado.
+     */
     @Override
     public void empaquetarPedido() {
-        System.out.println("El pedido ya esta empaquetado y listo.");
         pedido.notifyObservers("Terminado");
-        /*try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         pedido.estadoActual = pedido.estadoEntregado;
-        pedido.entregarPedido();*/
     }
 
     @Override
     public void entregarPedido() {
-        System.out.println("El pedido ya ha sido entregado.");
-        pedido.notifyObservers("El pedido ya ha sido entregado.");
+    }
+
+    /**
+     * Método que devuelve el nombre del estado actual.
+     * @return Nombre del estado "Terminado".
+     */
+    @Override
+    public String getEstadoNombre() {
+        return "Terminado";
     }
     
 }

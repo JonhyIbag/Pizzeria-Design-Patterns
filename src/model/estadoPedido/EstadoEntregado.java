@@ -1,55 +1,57 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.estadoPedido;
 import model.Pedido;
 
 /**
- *
- * @author Usuario
+ * Esta clase representa el estado "Entregado" de un pedido en el sistema de gestión de pedidos.
+ * Nos ayuda a manejar el comportamiento del pedido cuando se encuentra en este estado.
+ * @author Triplets
  */
 public class EstadoEntregado implements model.abst.EstadoPedido {
+    /**
+     * Referencia al pedido asociado con este estado. utilizado para poder realizar los cambios de estado y notificaciones correspondientes.
+     */
     private Pedido pedido;
 
+    /**
+     * Constructor de la clase EstadoEntregado.
+     * @param pedido
+     */
     public EstadoEntregado(Pedido pedido){
         this.pedido = pedido;
     }
 
     @Override
     public void recibirPedido() {
-        System.out.println("El pedido ya ha sido recibido.");
-        pedido.notifyObservers("El pedido ya ha sido recibido.");
     }
 
     @Override
     public void prepararPedido() {
-        System.out.println("El pedido está siendo preparado.");
-        pedido.notifyObservers("El pedido está siendo preparado.");
     }
 
     @Override
     public void cocinarPedido() {
-        System.out.println("El pedido está siendo horneado.");
-        pedido.notifyObservers("El pedido está siendo horneado.");
     }
 
     @Override
     public void empaquetarPedido() {
-        System.out.println("El pedido ya esta empaquetado y listo.");
-        pedido.notifyObservers("El pedido ya esta empaquetado y listo.");
     }
 
+    /**
+     * Método que maneja la acción de entregar el pedido cuando está en el estado "Entregado".
+     * Notifica a los observadores que el pedido ha sido entregado.
+     */
     @Override
     public void entregarPedido() {
-        System.out.println("El pedido ya ha sido entregado.");
         pedido.notifyObservers("Entregado");
-        /*try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        pedido.estadoActual = pedido.sinPedido;*/
+    }
+
+    /**
+     * Método que devuelve el nombre del estado actual.
+     * @return Nombre del estado "Entregado".
+     */
+    @Override
+    public String getEstadoNombre() {
+        return "Entregado";
     }
     
 }

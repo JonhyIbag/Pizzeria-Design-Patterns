@@ -1,14 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package vista.Controladores;
 
 import java.io.IOException;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 
 /**
- *
- * @author Usuario
+ * VentanaEstadoControlador es el controlador de la ventana que muestra el
+ * estado de un pedido en tiempo real.
+ * Implementa el patrón Observador para actualizar la interfaz cuando el estado
+ * del pedido cambia.
+ * 
+ * Para su funcionamiento, debe recibir un objeto Pedido y registrarse como
+ * observador del mismo. Dicho objeto pedido lo obtiene gracias al metodo setEstado.
+ * @author Triplets
  */
 
 import javafx.fxml.FXML;
@@ -20,7 +24,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Pedido;
-import model.PizzeriaFacade;
 import model.abst.Observador;
 
 public class VentanaEstadoControlador implements Observador{
@@ -28,24 +31,32 @@ public class VentanaEstadoControlador implements Observador{
     @FXML private Label lblIdPedido;
     @FXML private Label lblCliente;
 
-    // Puntos
+    /**
+     * Puntos
+     */
     @FXML private Label puntoRecibido;
     @FXML private Label puntoPreparando;
     @FXML private Label puntoHorneando;
     @FXML private Label puntoTerminado;
     @FXML private Label puntoEntregado;
 
-    // Líneas entre puntos
+    /**
+     * Lineas entre puntos
+     */
     @FXML private Label linea1;
     @FXML private Label linea2;
     @FXML private Label linea3;
     @FXML private Label linea4;
 
+    
+    /**
+     * Boton para salir de la ventana de estado
+     */
     @FXML private Button btnSalir;
 
-    //private Pedido pedido;
-
-    // Estilos para puntos y líneas
+    /** 
+     * Estilos para puntos y líneas
+     */
     private static final String PUNTO_ACTIVO =
             "-fx-background-color: #ff4a5a;" +
             "-fx-min-width: 16; -fx-min-height: 16;" +
@@ -70,53 +81,91 @@ public class VentanaEstadoControlador implements Observador{
             "-fx-min-height: 24; -fx-max-height: 24;" +
             "-fx-background-radius: 2;";
 
-    private PizzeriaFacade pizzeria;
+    /**
+     * Pedido cuyo estado se está monitoreando
+     */
+    private Pedido pedido;
 
     @FXML
     public void initialize() {
-        pizzeria = PizzeriaFacade.getInstance();
-        Pedido pedido = pizzeria.getPedidos().getLast();
-        
-        Label[] puntos = {
-                puntoRecibido,
-                puntoPreparando,
-                puntoHorneando,
-                puntoTerminado,
-                puntoEntregado
+    }
+
+    /**
+     * Configura los estilos de los puntos y líneas según el estado actual del pedido.
+     * @param puntos Array de etiquetas que representan los puntos de estado
+     * @param lineas Array de etiquetas que representan las líneas entre los puntos
+     * @param estadoActual El estado actual del pedido
+     */
+    private void setLineas(Label[] puntos, Label[] lineas, String estadoActual) {
+        int tam = 0;
+        if(estadoActual.equals("Vacio"))
+            tam=-1;
+        else if(estadoActual.equals("Recibido"))
+            tam=0;
+        else if(estadoActual.equals("Preparando"))
+            tam=1;
+        else if(estadoActual.equals("Horneando"))
+            tam=2;
+        else if(estadoActual.equals("Terminado"))
+            tam=3;
+        else if(estadoActual.equals("Entregado"))
+            tam=4;
+
+        for (int i=0; i<tam; i++) {
+            if (puntos[i] != null) puntos[i].setStyle(PUNTO_ACTIVO);
+            if(lineas[i]!=null && i<lineas.length) lineas[i].setStyle(LINEA_ACTIVA);
+        }
+
+        for (int i=tam; i<puntos.length; i++) {
+            if (puntos[i] != null) puntos[i].setStyle(PUNTO_INACTIVO);
+            if(i<lineas.length){
+                if(lineas[i]!=null)
+                    lineas[i].setStyle(LINEA_INACTIVA); 
+            }
+        }
+    }
+
+    /**
+     * Inicia la simulación del cambio de estado del pedido en intervalos de tiempo. Esto lo hace con ayuda de un hilo separado.
+     * Esto permite que el hilo principal se encargue de la interfaz gráfica y la actualización en tiempo real del estado del pedido. 
+     * Mientras tanto, el hilo secundario simula el progreso del pedido cambiando su estado en intervalos de tiempo predefinidos. 
+     * Gracias al patron observer y state implementados en el modelo, cada vez que el estado del pedido cambia,
+     * se notifica automáticamente a este controlador, que actualiza la interfaz gráfica en consecuencia.
+     * 
+     * @param pedido
+     */
+    private void iniciarSimulacion(Pedido pedido) {
+        Task<Void> tarea = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+
+                Thread.sleep(10000); 
+                Platform.runLater(() -> pedido.recibirPedido());
+
+                Thread.sleep(30000); 
+                Platform.runLater(() -> pedido.prepararPedido());
+
+                Thread.sleep(30000); 
+                Platform.runLater(() -> pedido.cocinarPedido());
+
+                Thread.sleep(20000);
+                Platform.runLater(() -> pedido.empaquetarPedido());
+
+                Thread.sleep(20000);
+                Platform.runLater(() -> pedido.entregarPedido());
+
+                return null;
+            }
         };
 
-        Label[] lineas = { linea1, linea2, linea3, linea4 };
-
-        for (Label p: puntos) {  
-            if (p != null) p.setStyle(PUNTO_INACTIVO);        
-        }
-        for (Label l: lineas) {  
-            if (l != null) l.setStyle(LINEA_INACTIVA);        
-        }
-        pedido.registerObservers(this);
-
-        //iniciarPedido(pedido);
-        //pizzeria.recibirPedido(pedido);
+        Thread hilo = new Thread(tarea);
+        hilo.setDaemon(true);
+        hilo.start();
     }
 
-    private void iniciarPedido(Pedido pedido) {
-        
-        try {
-            pedido.recibirPedido();
-            Thread.sleep(2000);
-            pedido.prepararPedido();
-            Thread.sleep(5000);
-            pedido.cocinarPedido();
-            Thread.sleep(8000);
-            pedido.empaquetarPedido();
-            Thread.sleep(2000);
-            pedido.entregarPedido();
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Maneja la acción del botón salir, regresando a la ventana principal.
+     */
     @FXML
     private void handleSalir() {
         try{
@@ -135,6 +184,12 @@ public class VentanaEstadoControlador implements Observador{
         }
     }
 
+    /**
+     * Actualiza la interfaz gráfica cuando el estado del pedido cambia.
+     * Dependiendo del mensaje recibido, actualiza los puntos y líneas correspondientes.
+     * 
+     * @param mensaje El nuevo estado del pedido
+     */
     @Override
     public void update(String mensaje) {
         if(mensaje.equals("Recibido")){
@@ -152,6 +207,41 @@ public class VentanaEstadoControlador implements Observador{
             puntoEntregado.setStyle(PUNTO_ACTIVO);
             linea4.setStyle(LINEA_ACTIVA);
         }
+    }
+
+    /**
+     * Establece el pedido cuyo estado se va a monitorear y actualiza la interfaz gráfica en consecuencia.
+     * Este metodo es llamado desde la ventana principal al abrir la ventana de estado, o 
+     * desde la ventana de confirmar pedido al finalizar un nuevo pedido.
+     * @param pedido
+     */
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+        actualizarPedido();
+    }
+
+    /**
+     * Actualiza la interfaz gráfica para reflejar el estado actual del pedido.
+     * Si el pedido está en estado "Recibido", inicia la simulación del cambio de estado.
+     * Si el pedido ya se encuentra en algun otro estado no se inicia la simulacion para evitar 
+     * la creacion de hilos innecesarios.
+     */
+    public void actualizarPedido(){
+        Label[] puntos = {
+                puntoRecibido,
+                puntoPreparando,
+                puntoHorneando,
+                puntoTerminado,
+                puntoEntregado
+        };
+
+        Label[] lineas = { linea1, linea2, linea3, linea4 };
+        setLineas(puntos, lineas, pedido.estadoActual.getEstadoNombre());
+
+        pedido.registerObservers(this);
+
+        if(pedido.estadoActual.getEstadoNombre().equals("Recibido"))
+            iniciarSimulacion(pedido);
     }
 }
 

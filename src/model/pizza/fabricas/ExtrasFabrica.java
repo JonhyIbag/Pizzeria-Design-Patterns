@@ -1,18 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.pizza.fabricas;
-
-/**
- *
- * @author Usuario
- */
-
 import model.abst.Ingrediente;
 import model.abst.IngredienteFabrica;
 import model.pizza.ingredientes.extras.*;
 
+/**
+ * Fabrica concreta para crear ingredientes de tipo extra.
+ * Hereda de IngredienteFabrica e implementa el metodo crearOtro.
+ * @author Triplets
+ */
 public class ExtrasFabrica extends IngredienteFabrica {
 
     @Override
@@ -45,6 +40,11 @@ public class ExtrasFabrica extends IngredienteFabrica {
         return null;
     }
 
+    /**
+     * Crea una instancia de un ingrediente de extra basado en el tipo proporcionado.
+     * @param tipo El tipo de extra a crear (Champinones, Pepperoni, Pimientos).
+     * @return Una instancia del ingrediente de extra correspondiente, o null si el tipo no es valido.
+     */
     @Override
     public Ingrediente crearOtro(String tipo) {
         switch (tipo) {

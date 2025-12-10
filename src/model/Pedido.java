@@ -1,17 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author Usuario
- */
-
-
 import java.util.ArrayList;
-
 import model.abst.EstadoPedido;
 import model.abst.Observador;
 import model.abst.Subject;
@@ -22,6 +11,13 @@ import model.estadoPedido.EstadoRecibido;
 import model.estadoPedido.EstadoTerminado;
 import model.estadoPedido.EstadoVacio;
 
+/**
+ * Es una de las clases principales del sistema, representa un pedido de pizzas realizado por un cliente.
+ * Utiliza el patrón de diseño State para manejar los diferentes estados del pedido. 
+ * De igual manera implementa el patrón Observer para notificar a los observadores sobre los cambios en el estado del pedido.
+ * Tiene una composición con la clase Cliente y una lista de pizzas asociadas al pedido.
+ * @author Triplets
+ */
 public class Pedido implements Subject{
     public EstadoPedido estadoActual;
     public EstadoPedido sinPedido;
@@ -37,7 +33,12 @@ public class Pedido implements Subject{
     private Cliente cliente;
     private ArrayList<Pizza> pizzas;
 
-    public Pedido() {
+    /**
+     * Constructor por defecto que inicializa los estados del pedido y establece el estado inicial como "sinPedido".
+     * @param cliente El cliente que realiza el pedido.
+     */
+    public Pedido(Cliente cliente) {
+        this.cliente = cliente;
         this.pizzas = new ArrayList<>();
         sinPedido = new EstadoVacio(this);
         estadoRecibido = new EstadoRecibido(this);
@@ -49,48 +50,75 @@ public class Pedido implements Subject{
         estadoActual = sinPedido;
     }
 
+    /**
+     * Método para realizar la accion correspondiente al estado de "recibido".
+     */
     public void recibirPedido() {
         estadoActual.recibirPedido();
     }
 
+    /**
+     * Método para realizar la accion correspondiente al estado de "preparando".
+     */
     public void prepararPedido() {
         estadoActual.prepararPedido();
     }
 
+    /**
+     * Método para realizar la accion correspondiente al estado de "recibido".
+     */
     public void cocinarPedido() {
         estadoActual.cocinarPedido();
     }
 
+    /**
+     * Método para realizar la accion correspondiente al estado de "empaquetar".
+     */
     public void empaquetarPedido() {
         estadoActual.empaquetarPedido();
     }
 
+    /**
+     * Método para realizar la accion correspondiente al estado de "entregado".
+     */
     public void entregarPedido() {
         estadoActual.entregarPedido();
     }
 
-    // Observer
+    /**
+     * Metodo implementados de la interfaz Subject para el patron Observer.
+     * @param o Observador que se desea registrar.
+     */
     public void registerObservers(Observador o){
         observers.add(o);
     }
+
+    /**
+     * Metodos implementados de la interfaz Subject para el patron Observer.
+     * @param o Observador que se desea eliminar.
+     */
     public void removeObservers(Observador o){
         observers.remove(o);
     }
+
+    /**
+     * Metodos implementados de la interfaz Subject para el patron Observer.
+     * @param mensaje Mensaje que se desea enviar a los observadores.
+     */
     public void notifyObservers(String mensaje){
         for(Observador o: observers){
             o.update(mensaje);
         }
     }
 
-    public Pedido(Cliente cliente){
-        // inicializar estados
-        this();
-        this.cliente = cliente;
+    /**
+     * Agrega una pizza al pedido.
+     * @param pizza Pizza que se desea agregar al pedido.
+     */
+    public void agregarPizza(Pizza pizza){
+        this.pizzas.add(pizza);
     }
-    public Cliente getCliente(){
-        return cliente;
-    }
-    // Para pizza
+
     public ArrayList<Pizza> getPizzas(){
         return pizzas;
     }
@@ -98,12 +126,11 @@ public class Pedido implements Subject{
         this.pizzas = pizzas;
     }
 
-    public void agregarPizza(Pizza pizza){
-        this.pizzas.add(pizza);
-    }
-
     public EstadoPedido getEstadoActual() {
         return estadoActual;
     }
 
+    public Cliente getCliente(){
+        return cliente;
+    }
 }

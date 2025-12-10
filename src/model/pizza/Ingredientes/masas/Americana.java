@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.pizza.ingredientes.masas;
 
 /**
- *
- * @author Usuario
+ * Ingrediente Concreto de Masas. Es creado a traves de MasasFabrica.
+ * @author Triplets
  */
 public class Americana extends Masa{
     private String nombre;
